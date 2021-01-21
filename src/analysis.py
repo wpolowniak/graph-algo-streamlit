@@ -135,22 +135,6 @@ def run_analysis(graph, genes_df, vol_radio, small_slider, medium_slider):
         .merge(genes_df[['node', 'nla']], how='left', left_on='child', right_on='node')
         .drop(columns=['node'])
         .rename(columns={'nla':'child_nla'})
-        # merge in parent CPT
-        .merge(genes_df[['node', 'cpt']], how='left', left_on='parent', right_on='node')
-        .drop(columns=['node'])
-        .rename(columns={'cpt':'parent_cpt'})
-        # merge in child CPT
-        .merge(genes_df[['node', 'cpt']], how='left', left_on='child', right_on='node')
-        .drop(columns=['node'])
-        .rename(columns={'cpt':'child_cpt'})
-        # merge in whether parent contains 81479
-        .merge(genes_df[['node', 'CPT 81479']], how='left', left_on='parent', right_on='node')
-        .drop(columns=['node'])
-        .rename(columns={'CPT 81479':'parent_81479'})
-        # merge in whether child contains 81479
-        .merge(genes_df[['node', 'CPT 81479']], how='left', left_on='child', right_on='node')
-        .drop(columns=['node'])
-        .rename(columns={'CPT 81479':'child_81479'})
     )
 
     # map in the sizes of panels
@@ -166,12 +150,5 @@ def run_analysis(graph, genes_df, vol_radio, small_slider, medium_slider):
     final_df.loc[final_df['parent_nla'] == final_df['child_nla'], 'nla_variance'] = 'parent and child nla equal'
     final_df.loc[final_df['parent_nla'] > final_df['child_nla'], 'nla_variance'] = 'parent nla greater than child'
     final_df.loc[final_df['parent_nla'] < final_df['child_nla'], 'nla_variance'] = 'parent nla less than child'
-
-    # flag where either parent or child may contain CPT 81479
-    values_in_question = ['Undetermined if contains 81479', 'Contains 81479']
-    final_df['parent or child contains 81479'] = ''
-    final_df.loc[(final_df['parent_81479'].isin(values_in_question)) | (final_df['child_81479'].isin(values_in_question)), 'parent or child contains 81479'] = 'yes'
-    # any that are not 'yes', change to 'no'
-    final_df['parent or child contains 81479'] = final_df['parent or child contains 81479'].replace('', 'no')
 
     return final_df

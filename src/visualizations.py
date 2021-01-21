@@ -27,8 +27,7 @@ def parent_child_overlap_scatter(df: DataFrame) -> alt.Chart:
         alt.X('child_volume', title='Volume of Child'),
         alt.Y('parent_volume', title='Volume of Parent'),
         color=alt.Color('parent_size', legend=alt.Legend(title='Panel Size')),
-        shape=alt.Shape('parent or child contains 81479'),
-        tooltip=['parent:N', 'parent_name:N', 'parent_genes:N', 'parent_nla:N', 'parent_cpt:N', 'child:N', 'child_name:N', 'child_genes:N', 'child_nla:N', 'child_cpt:N'],
+        tooltip=['parent:N', 'parent_name:N', 'parent_genes:N', 'parent_nla:N', 'child:N', 'child_name:N', 'child_genes:N', 'child_nla:N'],
         column=alt.Row('nla_variance')
     ).properties(width=200, height=300).interactive()
 
