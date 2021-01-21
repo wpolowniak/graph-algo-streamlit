@@ -44,9 +44,12 @@ else:
     df = pd.read_excel(loc)
 
 
+# Add num_genes
+df['num_genes'] = df['genes'].str.split().apply(lambda x: len(x))
+
 # map in a column with sizes of panels based on slider selections
 df_with_sizes = df.copy()
-df_with_sizes['Panel_Size'] = df_with_sizes['num_genes_whitepaper'].apply(sizes, args=(small_slider, medium_slider))
+df_with_sizes['Panel_Size'] = df_with_sizes['num_genes'].apply(sizes, args=(small_slider, medium_slider))
 
 graph_obj = create_graph(df)
 # total output file

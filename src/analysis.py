@@ -36,9 +36,6 @@ def sizes(value, small_slider, medium_slider):
         return 'large'
 
 def create_graph(genes_df):
-    # Add num_genes
-    genes_df['num_genes'] = genes_df['genes'].str.split().apply(lambda x: len(x))
-
     # put all genes in raw_gene_list and all test names in names_dict
     root = None
     raw_gene_list = []
