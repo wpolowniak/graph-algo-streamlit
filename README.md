@@ -28,3 +28,5 @@ We needed to determine what is the scope of the above issue for the entire portf
 I created a `GraphNode` class to capture the demographics info of each test including the test code, number of genes it contains, which genes it contains, and which other tests are children (or perfect subsets) of that test.
 
 The `create_graph()` function creates a graph using a `dictionary` object to compare the genes in each panel to every other panel and determine which panels are children of which others.
+
+Once the analysis is done the output is visualized using `streamlit`.

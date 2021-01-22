@@ -6,7 +6,7 @@ from analysis import *
 from visualizations import *
 from pathlib import Path
 
-def to_excel(df):
+def to_excel(df: pd.DataFrame):
     output = BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
     df.to_excel(writer, sheet_name='Sheet1', index=False)
@@ -14,7 +14,7 @@ def to_excel(df):
     processed_data = output.getvalue()
     return processed_data
 
-def get_table_download_link(df):
+def get_table_download_link(df: pd.DataFrame):
     """Generates a link allowing the data in a given panda dataframe to be downloaded
     in:  dataframe
     out: href string
@@ -23,7 +23,7 @@ def get_table_download_link(df):
     b64 = base64.b64encode(val)  # val looks like b'...'
     return f'<a href="data:application/octet-stream;base64,{b64.decode()}" download="extract.xlsx">Download xlsx file</a>' # decode b'abc' => abc
 
-st.title("BpG Gene Based Pricing Panel Overlap Analysis")
+st.title("Gene Based Pricing Panel Overlap Analysis")
 st.write("Analysis to identify cases where one panel is a perfect subset of another based on genes, and where there is overlap in size category.")
 st.write("""* **Perfect Subset** - when *all* of a panel's genes are contained in a bigger panel.
 * **Overlap** - when a panel and its perfect subset both fall into the same panel size category (small, medium, large).""")

@@ -25,7 +25,7 @@ def get_key(val, my_dict):
             return key
 
 # define function to map in the sizes of panels from streamlit sidebar
-def sizes(value, small_slider, medium_slider):
+def sizes(value: int, small_slider: int, medium_slider: int) -> str:
     if value == 1:
         return 'single'
     elif value <= small_slider: # max of the range. i.e if 25, then small is from 2 - 25 genes inclusive
@@ -35,8 +35,7 @@ def sizes(value, small_slider, medium_slider):
     else:
         return 'large'
 
-def create_graph(genes_df):
-    # put all genes in raw_gene_list and all test names in names_dict
+def create_graph(genes_df: pd.DataFrame) -> dict:
     root = None
     gene_list = []
     name_dict = {}
@@ -46,7 +45,8 @@ def create_graph(genes_df):
         current_genes = set(row['genes'].split())
         name_dict[row['node']] = current_genes
 
-        # add the set of genes for the current row to raw_gene_list, 
+        # add the set of genes for the current row to gene_list, for later sorting
+        # also identify root 
         if row['node'] == 'root':
             root = current_genes
         else:
@@ -55,24 +55,25 @@ def create_graph(genes_df):
     # Sort the data from largest to smallest value
     gene_list.sort(key=len, reverse=True)
 
-    # create a graph
+    # instantiate the graph
     graph = {'root': GraphNode(len(root), root, 'root')}
 
-    for gene in gene_list:
-        name_of_test = get_key(gene, name_dict)
-        num_genes = len(gene)
+    # cycle through all genes in gene_list to populate graph
+    for genes in gene_list:
+        name_of_test = get_key(genes, name_dict)
+        num_genes = len(genes)
     
-        # add children to node
+        # add children to node of parent if perfect subset
         for key in graph:
-            if gene.issubset(graph[key].genes):
+            if genes.issubset(graph[key].genes):
                 graph[key].children.append(name_of_test)
 
         # add node to the graph
-        graph[name_of_test] = GraphNode(num_genes, gene, name_of_test)
+        graph[name_of_test] = GraphNode(num_genes, genes, name_of_test)
 
     return graph
 
-def run_analysis(graph, genes_df, small_slider, medium_slider):
+def run_analysis(graph, genes_df: pd.DataFrame, small_slider: int, medium_slider: int) -> pd.DataFrame:
     """This function takes a graph as an input and returns the required analysis
     """
     # Create dict of panels with children (perfect subsets)
