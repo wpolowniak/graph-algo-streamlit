@@ -8,7 +8,7 @@ As an illustrative example:
 * 3-5 genes is a medium panel, with a price of $15
 * 5+ genes is a large panel, with a price of $20
 
-At a high level this strategy works, but there is a potential issue. You can have a genetic test, _PANEL1_, with genes [A, B, C], and a second test, _PANEL2_, with genes [A, B, C, D]. Both of these would be considered a medium panel according to the above construct because they each contain 3-5 genes, so they would both be pried at $15 for the ordering physician.
+At a high level this strategy works, but there is a potential issue. You can have a genetic test, _PANEL1_, with genes [A, B, C], and a second test, _PANEL2_, with genes [A, B, C, D]. Both of these would be considered a medium panel according to the above construct because they each contain 3-5 genes, so they would both be priced at $15 for the ordering physician.
 
 In healthcare when a physician performs a service, they submit a claim to be reimbursed by insurance. The reimbursement is determined based on the service performed. So you can have a scenario where _PANEL1_ is reimbursed at $30, while _PANEL2_ is reimbursed at $50.
 
@@ -28,3 +28,5 @@ We needed to determine what is the scope of this issue for the entire portfolio 
 I created a `GraphNode` class using a `dictionary` data structure to map which panels have a parent-child relationship, by checking if the set of genes in a panel is a subset of another panel. I then identified the size category of each panel and found where both parent and child fall in the same category. 
 
 To communicate the data I built a dashboad using `streamlit` to visualize the results, and also to allow for an interactive discovery process to determine what panel size cutoffs are optimal to minimize the cases of parent-child overlap.
+
+See it in action at https://share.streamlit.io/wpolowniak/graph-algo-streamlit/main/src/dashboard.py
