@@ -33,8 +33,6 @@ uploaded_file = st.sidebar.file_uploader('Choose an xlsx file, otherwise using e
 # sliders
 small_slider = st.sidebar.slider('Select Max Number of Genes for Small Category', value=20)
 medium_slider = st.sidebar.slider('Select Max Number of Genes for Medium Category', value=125, min_value=100, max_value=400)
-# Radio button to select volume
-vol_radio = st.sidebar.radio('Select which Payor volume to analyze:', ['US Institutional Clients', 'US Third Party', 'Both'])
 
 # can uplodad your own data to analyze, if not use default data
 if uploaded_file:
@@ -53,7 +51,7 @@ df_with_sizes['Panel_Size'] = df_with_sizes['num_genes'].apply(sizes, args=(smal
 
 graph_obj = create_graph(df)
 # total output file
-output_df = run_analysis(graph_obj, df, vol_radio, small_slider, medium_slider)
+output_df = run_analysis(graph_obj, df, small_slider, medium_slider)
 # overlap only file
 overlap_df = output_df.loc[output_df['overlap'] == 'yes']
 # ---------------------------------------------------------------------

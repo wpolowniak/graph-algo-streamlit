@@ -72,7 +72,7 @@ def create_graph(genes_df):
 
     return graph
 
-def run_analysis(graph, genes_df, vol_radio, small_slider, medium_slider):
+def run_analysis(graph, genes_df, small_slider, medium_slider):
     """This function takes a graph as an input and returns the required analysis
     """
     # Create dict of panels with children (perfect subsets)
@@ -91,14 +91,6 @@ def run_analysis(graph, genes_df, vol_radio, small_slider, medium_slider):
         .drop(columns=['level_1'])
         .rename(columns={'level_0':'parent',0:'child'})
     )
-
-    # calculate volume based on radio selection
-    if vol_radio == 'US Institutional Clients':
-        genes_df['volume'] = genes_df['client_vol']
-    elif vol_radio == 'US Third Party':
-        genes_df['volume'] = genes_df['third_party_vol']
-    elif vol_radio == 'Both':
-        genes_df['volume'] = genes_df['client_vol'] + genes_df['third_party_vol'] 
  
     # merge all required data from genes_df into the final output
     final_df = (
