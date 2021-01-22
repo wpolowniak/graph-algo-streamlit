@@ -38,7 +38,7 @@ medium_slider = st.sidebar.slider('Select Max Number of Genes for Medium Categor
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
 else:
-    loc = Path.cwd() / 'data' / 'default_data.xlsx'
+    loc = Path.cwd() / 'data' / 'default_data.csv'
     df = pd.read_csv(loc)
 
 
