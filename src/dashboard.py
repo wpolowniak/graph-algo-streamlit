@@ -8,7 +8,7 @@ from pathlib import Path
 
 def to_excel(df: pd.DataFrame):
     output = BytesIO()
-    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+    writer = pd.ExcelWriter(output, engine='openpyxl')
     df.to_excel(writer, sheet_name='Sheet1', index=False)
     writer.save()
     processed_data = output.getvalue()
