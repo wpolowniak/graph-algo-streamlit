@@ -19,9 +19,9 @@ def get_table_download_link(df: pd.DataFrame):
     in:  dataframe
     out: href string
     """
-    val = to_excel(df)
-    b64 = base64.b64encode(val)  # val looks like b'...'
-    return f'<a href="data:application/octet-stream;base64,{b64.decode()}" download="extract.xlsx">Download xlsx file</a>' # decode b'abc' => abc
+    val = df.to_csv(index=False)
+    b64 = base64.b64encode(val.encode())  # val looks like b'...'
+    return f'<a href="data:application/octet-stream;base64,{b64.decode()}" download="extract.csv">Download csv file</a>' # decode b'abc' => abc
 
 st.title("Gene Based Pricing Panel Overlap Analysis")
 st.write("Analysis to identify cases where one panel is a perfect subset of another based on genes, and where there is overlap in size category.")
