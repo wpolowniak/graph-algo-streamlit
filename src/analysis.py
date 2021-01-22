@@ -38,21 +38,21 @@ def sizes(value, small_slider, medium_slider):
 def create_graph(genes_df):
     # put all genes in raw_gene_list and all test names in names_dict
     root = None
-    raw_gene_list = []
+    gene_list = []
     name_dict = {}
-    for index, row in genes_df.iterrows():
+
+    for _, row in genes_df.iterrows():
+        # create a name_dict dictionary with structure: {'test_name':[List, Of, All, Genes]} 
         current_genes = set(row['genes'].split())
         name_dict[row['node']] = current_genes
+
+        # add the set of genes for the current row to raw_gene_list, 
         if row['node'] == 'root':
             root = current_genes
         else:
-            raw_gene_list.append(current_genes)
-    gene_list = []
-
+            gene_list.append(current_genes)
+    
     # Sort the data from largest to smallest value
-    for gene in raw_gene_list:
-        if gene.issubset(root) and gene not in gene_list: # No need to check if the gene already exists or if it is a subset of the root for this data set
-            gene_list.append(gene)
     gene_list.sort(key=len, reverse=True)
 
     # create a graph
