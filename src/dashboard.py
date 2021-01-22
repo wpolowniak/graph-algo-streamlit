@@ -36,10 +36,10 @@ medium_slider = st.sidebar.slider('Select Max Number of Genes for Medium Categor
 
 # can uplodad your own data to analyze, if not use default data
 if uploaded_file:
-    df = pd.read_excel(uploaded_file, engine='openpyxl')
+    df = pd.read_csv(uploaded_file)
 else:
     loc = Path.cwd() / 'data' / 'default_data.xlsx'
-    df = pd.read_excel(loc, engine='openpyxl')
+    df = pd.read_csv(loc)
 
 
 # Add num_genes
