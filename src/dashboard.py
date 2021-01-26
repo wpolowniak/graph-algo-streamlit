@@ -32,7 +32,7 @@ As an illustrative example:
 * 3-5 genes is a medium panel, with a price of $15
 * 5+ genes is a large panel, with a price of $20
 
-At a high level this strategy works, but there is a potential issue. You can have a genetic test, _PANEL1_, with genes [A, B, C], and a second test, _PANEL2_, with genes [A, B, C, D]. Both of these would be considered a medium panel according to the above construct because they each contain 3-5 genes, so they would both be pried at $15 for the ordering physician.
+At a high level this strategy works, but there is a potential issue. You can have a genetic test, _PANEL1_, with genes [A, B, C], and a second test, _PANEL2_, with genes [A, B, C, D]. Both of these would be considered a medium panel according to the above construct because they each contain 3-5 genes, so they would both be priced at $15 for the ordering physician.
 
 In healthcare when a physician performs a service, they submit a claim to be reimbursed by insurance. The reimbursement is determined based on the service performed. So you can have a scenario where _PANEL1_ is reimbursed at $30, while _PANEL2_ is reimbursed at $50.
 
@@ -98,7 +98,7 @@ st.header(f"Volume Relationships of {len(output_df.loc[output_df['overlap'] == '
 st.write(perfect_subset_overlap_summary(overlap_df))
 st.write(parent_child_overlap_scatter(overlap_df))
 st.write("""
-The medium graph shows the problematic instances that could potentially incentivize physicians. 
+The middle graph shows the problematic instances that could potentially incentivize physicians. 
 
 Using this visualization we can determine how widespread of an issue this is based on the selected category sizes.
 
